@@ -59,6 +59,10 @@ NC='\033[0m' # No Color
 MODULE_NAME="battery-monitor"
 MODULE_DIR="/usr/share/cockpit/battery-monitor"
 REQUIRED_FILES=("manifest.json" "index.html" "battery.js" "battery-style.css")
+VERSION="2.0.0"
+
+# Installer info
+INSTALLED=false
 
 #############################################################################
 # Functions
@@ -147,9 +151,8 @@ create_module_directory() {
     
     if [[ -d "$MODULE_DIR" ]]; then
         print_warning "Module directory already exists: $MODULE_DIR"
-        print_info "Backing up existing module..."
-        mv "$MODULE_DIR" "${MODULE_DIR}.backup.$(date +%s)"
-        print_success "Backup created"
+        INSTALLED=true
+        print_info "Updating..."
     fi
     
     mkdir -p "$MODULE_DIR"
@@ -250,15 +253,52 @@ cleanup() {
 trap cleanup EXIT
 
 # Show installation summary
-show_summary() {
+show_summary_install() {
     echo ""
     echo -e "${GREEN}╔════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${GREEN}║${NC}  Cockpit Battery Monitor Installation Complete!          ${GREEN}║${NC}"
+    echo -e "${GREEN}║${NC}  Cockpit Battery Monitor Installation Complete!            ${GREEN}║${NC}"
     echo -e "${GREEN}╚════════════════════════════════════════════════════════════╝${NC}"
     echo ""
     echo "Installation Summary:"
     echo "  Module Location: $MODULE_DIR"
     echo "  Module Name:     Battery Monitor"
+    echo "  Version:         $VERSION"
+    echo ""
+    echo "Next Steps:"
+    echo "  1. Open your browser and go to: https://localhost:9090"
+    echo "  2. Log in with your credentials."
+    echo "  3. Click on 'Battery Monitor' in the sidebar under 'Tools'."
+    echo ""
+    echo "Configuration:"
+    echo "  The module automatically detects your battery device."
+    echo "  If you need to change it, edit:"
+    echo "    $MODULE_DIR/battery.js"
+    echo "  And change the battery device path (line ~71)"
+    echo ""
+    echo "Troubleshooting:"
+    echo "  If the module doesn't appear:"
+    echo "    1. Clear your browser cache (Ctrl+Shift+R or Cmd+Shift+R)"
+    echo "    2. Check Cockpit logs: sudo journalctl -u cockpit -f"
+    echo "    3. Verify battery: ls /sys/class/power_supply/"
+    echo ""
+    echo "Uninstall:"
+    echo "  To remove the module, run:"
+    echo "    sudo rm -rf $MODULE_DIR"
+    echo "    sudo systemctl restart cockpit"
+    echo ""
+}
+
+# Show update summary
+show_summary_update() {
+    echo ""
+    echo -e "${GREEN}╔════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${GREEN}║${NC}  Cockpit Battery Monitor Update Complete!                  ${GREEN}║${NC}"
+    echo -e "${GREEN}╚════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    echo "Installation Summary:"
+    echo "  Module Location: $MODULE_DIR"
+    echo "  Module Name:     Battery Monitor"
+    echo "  Version:         $VERSION"
     echo ""
     echo "Next Steps:"
     echo "  1. Open your browser and go to: https://localhost:9090"
@@ -291,8 +331,8 @@ show_summary() {
 main() {
     echo ""
     echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${BLUE}║${NC}  Cockpit Battery Monitor Installation Script              ${BLUE}║${NC}"
-    echo -e "${BLUE}║${NC}  Version: 2.0.0                                           ${BLUE}║${NC}"
+    echo -e "${BLUE}║${NC}  Cockpit Battery Monitor Installation Script               ${BLUE}║${NC}"
+    echo -e "${BLUE}║${NC}  Version: ${VERSION}                                            ${BLUE}║${NC}"
     echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
     echo ""
     
@@ -308,7 +348,13 @@ main() {
     restart_cockpit
     
     # Show summary
-    show_summary
+    if [ "$INSTALLED" = false ] ; then
+        show_summary_install
+    else
+        show_summary_update
+    fi
+
+
 }
 
 # Run main function

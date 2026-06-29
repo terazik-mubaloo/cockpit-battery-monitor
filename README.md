@@ -4,7 +4,7 @@ A Cockpit module that displays comprehensive battery statistics.
 
 ## Compatibility
 
-- Any Linux distribution with Cockpit and a battery. (I'm pretty sure)#
+- Any Linux distribution with Cockpit and a battery. (I'm pretty sure)
 
 ### Confirmed Compatibility
 - Framework Laptop 12, running Fedora Linux 44 (KDE Plasma Desktop Edition).
@@ -70,22 +70,22 @@ Details displayed:
 - Charge Cycles: 0
 - Battery Device: BAT1
 
-## Installation
+## Installation / Update
 
-### Quick Install
+### Quick Install / Update
 
 ```bash
 # Clone the repository
 git clone https://github.com/terazik-mubaloo/cockpit-battery-monitor.git
 
-# Install
+# Run the script
 cd cockpit-battery-monitor
 sudo bash install.sh
 ```
 
 ### Manual Install
 
-See [INSTALL.md](INSTALL.md) for detailed installation instructions.
+See [INSTALL.md](INSTALL.md) for detailed installation instructions. (Might cause issues.)
 
 ## Usage
 
