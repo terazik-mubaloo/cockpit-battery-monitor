@@ -4,7 +4,11 @@ A Cockpit module that displays comprehensive battery statistics.
 
 ## Compatibility
 
-- Any Linux distribution with Cockpit and a battery. (I'm pretty sure)
+- Any Linux distribution with Cockpit and a battery. (I'm pretty sure)#
+
+### Confirmed Compatibility
+- Framework Laptop 12, running Fedora Linux 44 (KDE Plasma Desktop Edition).
+- Thinkpad S1 Yoga, running Fedora Linux 44 (Server Edition).
 
 ## Features
 
@@ -142,6 +146,7 @@ If battery information is not showing:
 
 ## Contributing
 
+- If all stats show up on your device correctly, open an issue writing both your laptop model and the OS you're running, so that I can add them to a confirmed compatibility list!
 - For issues, or suggestions, please open an issue on GitHub.
 - If you want to make your own plugin for Cockpit, go [here!](https://cockpit-project.org/blog/creating-plugins-for-the-cockpit-user-interface.html)
 

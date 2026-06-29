@@ -40,6 +40,9 @@ let batteryHistory = {
   maxEntries: 30
 };
 
+// Bool to halve history posting
+let justPosted = false;
+
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', function() {
   updateBatteryMonitor();
@@ -130,9 +133,27 @@ async function updateBatteryMonitor() {
     // Read all available battery information
     const capacity = await readBatteryFile(batteryBasePath + "/capacity");
     const status = await readBatteryFile(batteryBasePath + "/status");
-    const chargeNow = await readBatteryFile(batteryBasePath + "/charge_now");
-    const chargeFull = await readBatteryFile(batteryBasePath + "/charge_full");
-    const chargeFullDesign = await readBatteryFile(batteryBasePath + "/charge_full_design");
+    // Check which name the file uses, energy_now or charge_now
+    let chargeNow
+    if ( await readBatteryFile(batteryBasePath + "/charge_now") == null ) {
+      chargeNow = await readBatteryFile(batteryBasePath + "/energy_now");
+    } else {
+      chargeNow = await readBatteryFile(batteryBasePath + "/charge_now");
+    }
+    // Check which name the file uses, energy_full or charge_full
+    let chargeFull
+    if ( await readBatteryFile(batteryBasePath + "/charge_full") == null ) {
+      chargeFull = await readBatteryFile(batteryBasePath + "/energy_full");
+    } else {
+      chargeFull = await readBatteryFile(batteryBasePath + "/charge_full");
+    }
+    // Check which name the file uses, energy_full_design or charge_full_design
+    let chargeFullDesign
+    if ( await readBatteryFile(batteryBasePath + "/charge_full_design") == null ) {
+      chargeFullDesign = await readBatteryFile(batteryBasePath + "/energy_full_design");
+    } else {
+      chargeFullDesign = await readBatteryFile(batteryBasePath + "/charge_full_design");
+    }
     const voltageNow = await readBatteryFile(batteryBasePath + "/voltage_now");
     const currentNow = await readBatteryFile(batteryBasePath + "/current_now");
     const manufacturer = await readBatteryFile(batteryBasePath + "/manufacturer");
@@ -155,7 +176,8 @@ async function updateBatteryMonitor() {
       const timeStr = now.toLocaleTimeString();
       batteryHistory.entries.unshift({
         time: timeStr,
-        percent: parseInt(capacity)
+        percent: parseInt(capacity),
+        status: getStatusBadge(status)
       });
 
       if (batteryHistory.entries.length > batteryHistory.maxEntries) {
@@ -265,7 +287,6 @@ async function updateBatteryMonitor() {
           <span class="info-value">${health}% - ${healthStatus}</span>
           </div>
           <div class="health-bar">
-          <div class="health-fill ${health < 60 ? 'critical' : health < 80 ? 'warning' : ''}" style="width: ${health}%"></div>
           </div>
 
           <div style="margin-top: 20px;">
@@ -278,7 +299,8 @@ async function updateBatteryMonitor() {
           <span class="info-value">${chargeFull ? (parseInt(chargeFull) / 1000000).toFixed(2) : 'N/A'} Ah</span>
           </div>
 
-          ${health < 80 ? `
+          ${
+            health < 80 ? `
             <div class="warning-box">
             ⚠️ Battery health is degrading. Consider battery replacement soon.
             </div>
@@ -291,8 +313,8 @@ async function updateBatteryMonitor() {
             ✓ Battery health is excellent!
             </div>
             `}
-            </div>
-            `;
+          </div>
+          `;
 
             // Battery Information Card
             html += `
@@ -321,11 +343,12 @@ async function updateBatteryMonitor() {
             </div>
             <div class="device-info-item">
             <div class="device-info-label">Battery Device</div>
-            <div class="device-info-value">${batteryName || 'N/A'}</div>
+            <div class="device-info-value">${batteryBaseName}</div>
             </div>
             </div>
             </div>
             `;
+
 
             // Battery History Card
             html += `
@@ -336,20 +359,23 @@ async function updateBatteryMonitor() {
               <div class="history-entry">
               <span class="history-time">${entry.time}</span>
               <span class="history-percent">${entry.percent}%</span>
+              <span class="history-percent">${entry.status}</span>
               </div>
               `).join('')}
-              </div>
-              </div>
-              `;
+            </div>
+            </div>
+            `;
 
-              // Update the page
-              const elem = document.getElementById("battery-info");
-              if (elem) {
-                elem.innerHTML = html;
-                console.log("Battery info updated successfully at " + new Date().toLocaleTimeString());
-              } else {
-                console.error("Element 'battery-info' not found in DOM!");
-              }
+
+
+            // Update the page
+            const elem = document.getElementById("battery-info");
+            if (elem) {
+              elem.innerHTML = html;
+              console.log("Battery info updated successfully at " + new Date().toLocaleTimeString());
+            } else {
+              console.error("Element 'battery-info' not found in DOM!");
+            }
 
   } catch (error) {
     console.error("Error updating battery monitor:", error);
