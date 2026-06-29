@@ -1,10 +1,10 @@
 # Cockpit Battery Monitor
 
-A beautiful and feature-rich Cockpit module that displays comprehensive battery statistics.
+A Cockpit module that displays comprehensive battery statistics.
 
 ## Compatibility
 
-- Any Linux distribution with Cockpit and a battery. 
+- Any Linux distribution with Cockpit and a battery. (I'm pretty sure)
 
 ## Features
 
@@ -31,30 +31,18 @@ A beautiful and feature-rich Cockpit module that displays comprehensive battery 
 
 ## Screenshots
 
-### Main Dashboard
+### Battery Status Card
 
-The main dashboard displays important information at a glance:
+Displays important information at a glance:
 
-![Battery Monitor Dashboard](screenshots/dashboard.png)
+![Battery Status Card](screenshots/battery-status.png)
 
 Key elements visible:
 - **Battery Percentage**: Large circular indicator showing current charge percentage
 - **Status Badge**: Shows current status (Full, Charging, Discharging)
 - **Quick Stats**: Current charge, capacity, voltage, and power usage
 
-- ### Battery Status Card
-
-![Battery Status](screenshots/battery-status.png)
-
-Displays:
-- Real-time battery percentage (100%)
-- Current charging status
-- Current and full capacity (Ah)
-- System voltage (V)
-- Power consumption (W)
-- Color-coded health indicator
-
-- ### Battery Health Information
+### Battery Health Information
 
 ![Battery Health](screenshots/battery-health.png)
 
