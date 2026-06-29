@@ -1,8 +1,8 @@
 {
-  "version": 1,
+  "version": 2,
   "tools": {
-    "battery-stats": {
-      "label": "Battery Stats",
+    "battery-monitor": {
+      "label": "Battery Monitor",
       "path": "index.html"
     }
   }

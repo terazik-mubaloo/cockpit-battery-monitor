@@ -1,6 +1,43 @@
 #!/bin/bash
 
 #############################################################################
+# GNU General Public License
+# Copyright (c) 2026 Razla
+#
+# This file is part of Cockpit Battery Monitor.
+#
+# Cockpit Battery Monitor is free: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Cockpit Battery Monitor is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with Cockpit Battery Monitor. If not, see https://www.gnu.org/licenses/.
+#
+# Cockpit Battery Monitor incorporates work covered by the following copyright and
+# permission notice:
+#
+#     MIT License
+#     Copyright (c) 2025 Rishu Patel
+#
+#     Permission is hereby granted, free of charge, to any person obtaining a copy
+#     of this software and associated documentation files (the "Software"), to deal
+#     in the Software without restriction, including without limitation the rights
+#     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#     copies of the Software, and to permit persons to whom the Software is
+#     furnished to do so, subject to the following conditions:
+#
+#     The above copyright notice and this permission notice shall be included in all
+#     copies or substantial portions of the Software.
+#
+#     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#     SOFTWARE.
+#
+#
+#############################################################################
 # Cockpit Battery Monitor - Installation Script
 #
 # This script automates the installation of the Cockpit Battery Monitor
@@ -225,9 +262,8 @@ show_summary() {
     echo ""
     echo "Next Steps:"
     echo "  1. Open your browser and go to: https://localhost:9090"
-    echo "  2. Log in with your credentials"
-    echo "  3. Look for 'Battery Monitor' in the sidebar under 'Tools'"
-    echo "  4. Click it to view your battery information"
+    echo "  2. Log in with your credentials."
+    echo "  3. Click on 'Battery Monitor' in the sidebar under 'Tools'."
     echo ""
     echo "Configuration:"
     echo "  The module automatically detects your battery device."
@@ -256,7 +292,7 @@ main() {
     echo ""
     echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
     echo -e "${BLUE}║${NC}  Cockpit Battery Monitor Installation Script              ${BLUE}║${NC}"
-    echo -e "${BLUE}║${NC}  Version: 1.0                                             ${BLUE}║${NC}"
+    echo -e "${BLUE}║${NC}  Version: 2.0.0                                           ${BLUE}║${NC}"
     echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
     echo ""
     

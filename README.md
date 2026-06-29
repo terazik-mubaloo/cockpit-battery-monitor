@@ -1,42 +1,29 @@
-# Cockpit Battery Stats
+# Cockpit Battery Monitor
 
-A beautiful and feature-rich Cockpit module that displays comprehensive battery statistics for laptops running Ubuntu Server with Cockpit.
+A beautiful and feature-rich Cockpit module that displays comprehensive battery statistics.
+
+## Compatibility
+
+- Any Linux distribution with Cockpit and a battery. 
 
 ## Features
 
-✨ **Real-time Battery Monitoring**
+**Real-time Battery Monitoring**
 - Live battery percentage with color-coded indicators
 - Current charge status (Charging/Discharging/Full)
 - Voltage and power usage monitoring
 
-🔋 **Battery Health Analysis**
+**Battery Health Analysis**
 - Overall battery health percentage
 - Design vs. current capacity comparison
 - Health degradation warnings
 - Battery wear assessment
 
-⏱️ **Time Estimates**
-- Estimated time until battery depletion (when discharging)
-- Estimated time to full charge (when charging)
-
-📊 **Battery History**
+**Battery History**
 - Track last 30 battery readings
 - Timestamp for each reading
-- Historical data for trend analysis
 
-⚠️ **Smart Alerts**
-- Low battery critical warnings
-- Battery degradation alerts
-- Health status notifications
-
-📱 **Beautiful Dashboard**
-- Modern purple gradient UI
-- Responsive design (desktop & mobile)
-- Circular battery percentage indicator
-- Visual progress bars
-- Color-coded status badges
-
-🔧 **Device Information**
+**Device Information**
 - Manufacturer and model details
 - Serial number
 - Battery technology type (Li-ion, etc.)
@@ -46,14 +33,13 @@ A beautiful and feature-rich Cockpit module that displays comprehensive battery 
 
 ### Main Dashboard
 
-The main Battery Monitor dashboard displays all battery information at a glance:
+The main dashboard displays important information at a glance:
 
 ![Battery Monitor Dashboard](screenshots/dashboard.png)
 
 Key elements visible:
 - **Battery Percentage**: Large circular indicator showing current charge percentage
 - **Status Badge**: Shows current status (Full, Charging, Discharging)
-- **Charge Level**: Visual progress bar showing charge percentage
 - **Quick Stats**: Current charge, capacity, voltage, and power usage
 
 - ### Battery Status Card
@@ -72,7 +58,7 @@ Displays:
 
 ![Battery Health](screenshots/battery-health.png)
 
-Shows:
+Details displayed:
 - Battery health percentage
 - Design vs. current capacity comparison
 - Health degradation indicators
@@ -92,23 +78,16 @@ Details displayed:
 - Charge Cycles: 0
 - Battery Device: BAT1
 
-## Requirements
-
-- Ubuntu Server (or any Linux distribution)
-- Cockpit installed and running
-- Laptop with battery (BAT0, BAT1, or similar)
-- Root/administrative access to Cockpit
-
 ## Installation
 
 ### Quick Install
 
 ```bash
 # Clone the repository
-git clone https://github.com/FatVenom/cockpit-battery-monitor.git
+git clone https://github.com/terazik-mubaloo/cockpit-battery-monitor.git
 
 # Install
-cd cockpit-battery-stats
+cd cockpit-battery-monitor
 sudo bash install.sh
 ```
 
@@ -116,26 +95,11 @@ sudo bash install.sh
 
 See [INSTALL.md](INSTALL.md) for detailed installation instructions.
 
-## Configuration
-
-The module automatically detects your battery device. If you have multiple batteries or a different battery device name, edit `battery.js` and update:
-
-```javascript
-const batteryBasePath = "/sys/class/power_supply/BAT1";
-```
-
-Replace `BAT1` with your battery device name. Find available devices with:
-
-```bash
-ls /sys/class/power_supply/
-```
-
 ## Usage
 
 1. Open Cockpit in your web browser (usually `https://localhost:9090`)
 2. Log in with your credentials
-3. In the sidebar under "Tools", click **"Battery Stats"**
-4. View your battery information and statistics
+3. In the sidebar under "Tools", click **"Battery Monitor"**
 
 The dashboard updates automatically every 30 seconds.
 
@@ -148,7 +112,7 @@ If you see a blank page:
 1. **Check browser console** (F12) for errors
 2. **Verify file permissions:**
    ```bash
-   ls -la /usr/share/cockpit/battery-stats/
+   ls -la /usr/share/cockpit/battery-monitor/
    ```
 3. **Check Cockpit logs:**
    ```bash
@@ -177,27 +141,10 @@ If battery information is not showing:
 
 1. **Verify installation location:**
    ```bash
-   ls /usr/share/cockpit/battery-stats/
+   ls /usr/share/cockpit/battery-monitor/
    ```
 2. **Check manifest.json** is properly formatted
 3. **Restart Cockpit** and refresh browser
-
-
-## How It Works
-
-The module uses Cockpit's `cockpit.spawn()` API to safely read battery information from `/sys/class/power_supply/` without exposing system files directly to the browser. This approach:
-
-- ✅ Maintains security (server-side execution)
-- ✅ Avoids browser sandbox restrictions
-- ✅ Provides real-time data updates
-- ✅ Handles missing or unavailable battery files gracefully
-
-## Supported Systems
-
-- Ubuntu Server 18.04+
-- Debian with Cockpit
-- Any Linux distribution with Cockpit and battery support
-- x86_64 and ARM architectures
 
 ## Known Limitations
 
@@ -207,31 +154,13 @@ The module uses Cockpit's `cockpit.spawn()` API to safely read battery informati
 
 ## Contributing
 
-Contributions are welcome! Feel free to:
-
-- Report bugs
-- Suggest improvements
-- Submit pull requests
-- Improve documentation
+For issues, or suggestions, please open an issue on GitHub.
+If you want to make your own plugin for Cockpit, go [here!](https://cockpit-project.org/blog/creating-plugins-for-the-cockpit-user-interface.html)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GPL v.3.0 license, but includes files also licensed under the MIT license - see the [LICENSE](LICENSE) file for details.
 
-## Author
-
-Created with ❤️ for the Cockpit and Ubuntu community.
-
-## Support
-
-For issues, questions, or suggestions, please open an issue on GitHub.
-
-## Related Projects
-
-- [Cockpit](https://cockpit-project.org/) - The web console for Linux servers
-- [Ubuntu Server](https://ubuntu.com/server) - Ubuntu's server distribution
-- [Battery Management on Linux](https://wiki.archlinux.org/title/Laptop)
-
----
+`SPDX-License-Identifier: MIT AND GPL-3.0-or-later`
 
 **Note:** This is a community project and is not officially affiliated with the Cockpit project.
