@@ -287,6 +287,7 @@ async function updateBatteryMonitor() {
           <span class="info-value">${health}% - ${healthStatus}</span>
           </div>
           <div class="health-bar">
+          <div class="health-fill ${health < 60 ? 'critical' : health < 80 ? 'warning' : ''}" style="width: ${health}%"></div>
           </div>
 
           <div style="margin-top: 20px;">
