@@ -82,6 +82,7 @@ function getHealthStatus(health) {
   if (health >= 95) return "Excellent";
   if (health >= 80) return "Good";
   if (health >= 60) return "Fair";
+  if (health == -1) return "N/A";
   return "Poor";
 }
 
@@ -187,10 +188,12 @@ async function updateBatteryMonitor() {
 
     // Calculate health
     let health = 100;
-    if (chargeFullDesign && chargeFull) {
+    if (chargeFullDesign || chargeFull) {
       const cFullDesign = parseInt(chargeFullDesign);
       const cFull = parseInt(chargeFull);
       health = ((cFull / cFullDesign) * 100).toFixed(1);
+    } else {
+      health = -1;
     }
 
     // Calculate power
@@ -300,8 +303,11 @@ async function updateBatteryMonitor() {
           <span class="info-value">${chargeFull ? (parseInt(chargeFull) / 1000000).toFixed(2) : 'N/A'} Ah</span>
           </div>
 
-          ${
-            health < 80 ? `
+          ${health == -1 ? `
+            <div class="warning-box">
+            ⚠️ Battery not found.
+            </div>
+            ` : health < 80 ? `
             <div class="warning-box">
             ⚠️ Battery health is degrading. Consider battery replacement soon.
             </div>
@@ -314,8 +320,8 @@ async function updateBatteryMonitor() {
             ✓ Battery health is excellent!
             </div>
             `}
-          </div>
-          `;
+            </div>
+            `;
 
             // Battery Information Card
             html += `
