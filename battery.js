@@ -139,9 +139,14 @@ async function updateBatteryMonitor() {
     const modelName = await readBatteryFile(batteryBasePath + "/model_name");
     const serialNumber = await readBatteryFile(batteryBasePath + "/serial_number");
     const technology = await readBatteryFile(batteryBasePath + "/technology");
-    const cycleCount = await readBatteryFile(batteryBasePath + "/cycle_count");
+    let cycleCount = await readBatteryFile(batteryBasePath + "/cycle_count");
     const timeToEmpty = await readBatteryFile(batteryBasePath + "/time_to_empty_now");
     const timeToFull = await readBatteryFile(batteryBasePath + "/time_to_full_now");
+
+    // Check if cycleCount is 0. If so sets to N/A (Since for the vast majority of the time, the battery not having had a cycle means it just can't read it.)
+    if (cycleCount==0){
+      cycleCount='N/A'
+    }
 
     // Update battery history
     if (capacity) {
@@ -311,7 +316,7 @@ async function updateBatteryMonitor() {
             </div>
             <div class="device-info-item">
             <div class="device-info-label">Charge Cycles</div>
-            <div class="device-info-value">${if (cycle_count==0){return 'N/A'}; || cycleCount || 'N/A'}</div>
+            <div class="device-info-value">${cycleCount || 'N/A'}</div>
             </div>
             <div class="device-info-item">
             <div class="device-info-label">Battery Device</div>
