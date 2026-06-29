@@ -142,6 +142,7 @@ async function updateBatteryMonitor() {
     let cycleCount = await readBatteryFile(batteryBasePath + "/cycle_count");
     const timeToEmpty = await readBatteryFile(batteryBasePath + "/time_to_empty_now");
     const timeToFull = await readBatteryFile(batteryBasePath + "/time_to_full_now");
+    const batteryName = await readBatteryFile(batteryBasePath + "hwmon*/name");
 
     // Check if cycleCount is 0. If so sets to N/A (Since for the vast majority of the time, the battery not having had a cycle means it just can't read it.)
     if (cycleCount==0){
@@ -320,7 +321,7 @@ async function updateBatteryMonitor() {
             </div>
             <div class="device-info-item">
             <div class="device-info-label">Battery Device</div>
-            <div class="device-info-value">${batteryBaseName}</div>
+            <div class="device-info-value">${batteryName || 'N/A'}</div>
             </div>
             </div>
             </div>
