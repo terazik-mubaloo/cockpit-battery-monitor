@@ -54,7 +54,7 @@ Details displayed:
 - Current capacity
 - Battery wear assessment
 
-- ### Device Information
+### Device Information
 
 ![Device Information](screenshots/device-info.png)
 
@@ -142,13 +142,11 @@ If battery information is not showing:
 
 ## Contributing
 
-For issues, or suggestions, please open an issue on GitHub.
-If you want to make your own plugin for Cockpit, go [here!](https://cockpit-project.org/blog/creating-plugins-for-the-cockpit-user-interface.html)
+- For issues, or suggestions, please open an issue on GitHub.
+- If you want to make your own plugin for Cockpit, go [here!](https://cockpit-project.org/blog/creating-plugins-for-the-cockpit-user-interface.html)
 
 ## License
 
-This project is licensed under the GPL v.3.0 license, but includes files also licensed under the MIT license - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [GPL v.3.0 license](LICENSE-GPL), but incorporates work licensed under the [MIT license](LICENSE-MIT).
 
 `SPDX-License-Identifier: MIT AND GPL-3.0-or-later`
-
-**Note:** This is a community project and is not officially affiliated with the Cockpit project.
