@@ -311,7 +311,7 @@ async function updateBatteryMonitor() {
             </div>
             <div class="device-info-item">
             <div class="device-info-label">Charge Cycles</div>
-            <div class="device-info-value">${cycleCount || 'N/A'}</div>
+            <div class="device-info-value">${if (cycle_count==0){return 'N/A'}; || cycleCount || 'N/A'}</div>
             </div>
             <div class="device-info-item">
             <div class="device-info-label">Battery Device</div>
