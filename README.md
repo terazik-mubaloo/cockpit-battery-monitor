@@ -33,6 +33,13 @@ A Cockpit module that displays comprehensive battery statistics.
 - Battery technology type (Li-ion, etc.)
 - Charge cycle count
 
+### Planned Features (for version 2.0.0)
+
+- Theme matching the rest of cockpit.
+- A drop-down menu to switch between themes.(non priority)
+- Stop all data, especially the battery history, from being displayed too wide apart when seen on a PC.
+- Have Battery history refreshed at a different rate from the rest, and be able to set that rate in the gui.
+
 ## Screenshots
 
 ### Battery Status Card
