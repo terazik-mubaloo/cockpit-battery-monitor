@@ -33,7 +33,7 @@ A Cockpit module that displays comprehensive battery statistics.
 - Battery technology type (Li-ion, etc.)
 - Charge cycle count
 
-### Planned Features (for version 2.0.0)
+### Planned Features (for release v2.0.0)
 
 - Theme matching the rest of cockpit.
 - A drop-down menu to switch between themes.(non priority)
